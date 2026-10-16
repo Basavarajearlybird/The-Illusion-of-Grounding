@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use GIB-15K, please cite it as below."
+title: "GIB-15K: The Illusion of Grounding — A Diagnostic Benchmark for Multimodal RAG under Retrieval Noise, Visual Ambiguity, and Cross-Modal Conflict"
+abstract: >-
+  GIB-15K is a diagnostic benchmark of 15,000 image-QA pairs, drawn from COCO
+  and Visual Genome and labelled by hallucination sub-type (object / attribute /
+  relation). Each pair carries three adversarial variants applied at controlled
+  dosages: retrieval noise (hard negatives), visual ambiguity (blur / motion /
+  low-resource cropping), and cross-modal conflict (with counterfactual twins).
+  The benchmark combines dosage-response curves, an internal attention audit, and
+  a human ceiling in a single instrument, and includes a machine-computable
+  failure taxonomy (Knowledge Inertia / Sensory Capture / Reasoning Collapse).
+type: dataset
+version: "1.0.0"
+date-released: "2026-07-30"
+license: CC-BY-4.0
+repository-code: "https://github.com/gib15k/gib15k"
+url: "https://huggingface.co/datasets/gib15k"
+keywords:
+  - multimodal
+  - retrieval-augmented generation
+  - hallucination
+  - vision-language models
+  - benchmark
+  - robustness
+  - interpretability
+authors:
+  - name: "The GIB-15K maintainers"
+preferred-citation:
+  type: article
+  title: "The Illusion of Grounding: A Diagnostic Benchmark for Multimodal RAG under Retrieval Noise, Visual Ambiguity, and Cross-Modal Conflict"
+  year: 2026
+  authors:
+    - name: "The GIB-15K maintainers"

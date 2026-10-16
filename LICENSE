@@ -1,0 +1,66 @@
+Attribution 4.0 International (CC BY 4.0)
+
+GIB-15K: The Illusion of Grounding — a diagnostic benchmark for multimodal RAG
+under retrieval noise, visual ambiguity, and cross-modal conflict.
+
+Copyright (c) 2026 The GIB-15K maintainers.
+
+================================================================================
+SCOPE
+================================================================================
+
+This work is dual-scoped:
+
+  * The GIB-15K ANNOTATIONS, transformation scripts, generated metadata, and all
+    ORIGINAL SOURCE CODE in this repository are released under the Creative
+    Commons Attribution 4.0 International License (CC BY 4.0), reproduced in
+    summary below.
+
+  * The underlying SOURCE IMAGERY is NOT redistributed by this project and
+    remains under its original license:
+        - COCO 2017          — see https://cocodataset.org/#termsofuse
+        - Visual Genome      — CC BY 4.0, https://visualgenome.org/
+    Degraded images are regenerated from source by `make dataset` and verified
+    byte-for-byte against the `image_sha256` column; they are never shipped.
+
+By using this dataset or code you agree to attribute the source datasets under
+their respective terms in addition to attributing GIB-15K.
+
+================================================================================
+CC BY 4.0 — HUMAN-READABLE SUMMARY (not a substitute for the full license)
+================================================================================
+
+You are free to:
+
+  * Share — copy and redistribute the material in any medium or format.
+  * Adapt — remix, transform, and build upon the material for any purpose,
+    even commercially.
+
+Under the following terms:
+
+  * Attribution — You must give appropriate credit, provide a link to the
+    license, and indicate if changes were made. You may do so in any reasonable
+    manner, but not in any way that suggests the licensor endorses you or your
+    use.
+
+  * No additional restrictions — You may not apply legal terms or technological
+    measures that legally restrict others from doing anything the license
+    permits.
+
+The full legal text of CC BY 4.0 is available at:
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+================================================================================
+HOW TO CITE
+================================================================================
+
+See CITATION.cff, or:
+
+    @misc{gib15k2026,
+      title  = {The Illusion of Grounding: A Diagnostic Benchmark for Multimodal
+                RAG under Retrieval Noise, Visual Ambiguity, and Cross-Modal
+                Conflict},
+      author = {The GIB-15K maintainers},
+      year   = {2026},
+      note   = {Dataset and code released under CC BY 4.0}
+    }

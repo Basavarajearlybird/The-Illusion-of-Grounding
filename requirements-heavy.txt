@@ -1,0 +1,29 @@
+# Optional dependencies, split out so the core pipeline stays laptop-installable.
+#
+# Install with `make install-heavy` on the eval box. The registry tolerates any
+# of these being absent — a machine with no torch can still run the API tier, and
+# a machine with no API SDKs can still run the local tier.
+
+# --- open-model evaluation (Track A) + the interpretability probe ------------
+torch>=2.2
+transformers>=4.45          # LLaVA-NeXT and Qwen2.5-VL support
+accelerate>=0.30
+sentencepiece>=0.2
+bitsandbytes>=0.43          # only if VRAM forces 4-bit; report it if used
+vllm>=0.6                   # optional, for throughput where supported
+
+# --- hard-negative mining ----------------------------------------------------
+sentence-transformers>=3.0  # BAAI/bge-large-en-v1.5
+faiss-cpu>=1.8              # swap for faiss-gpu on the eval box
+
+# --- closed-model APIs (Track B) --------------------------------------------
+openai>=1.40
+google-genai>=0.3
+anthropic>=0.40             # default judge backend
+
+# --- optional NLP -----------------------------------------------------------
+spacy>=3.7                  # richer mutation targeting on paraphrased documents
+nltk>=3.8                   # WordNet synonyms in the scoring cascade
+
+# --- experiment tracking ----------------------------------------------------
+wandb>=0.17

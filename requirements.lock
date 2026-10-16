@@ -1,0 +1,22 @@
+# Exact dependency versions captured for reproducibility (`pip freeze`).
+# Install the pinned environment with:  pip install -r requirements.lock
+# This is the environment the released v1.0 build and figures were produced in.
+# For a flexible install use requirements.txt instead.
+Jinja2==3.1.6
+PyYAML==6.0.3
+duckdb==1.5.4
+matplotlib==3.11.1
+mlcroissant==1.1.0
+numpy==2.5.1
+opencv-python-headless==5.0.0.93
+pandas-stubs==3.0.3.260530
+pandas==3.0.3
+pillow==10.3.0
+pyarrow==25.0.0
+pytest==9.1.1
+requests==2.31.0
+ruff==0.15.22
+scikit-learn==1.9.0
+scipy==1.18.0
+tabulate==0.10.0
+tqdm==4.66.2
