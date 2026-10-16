@@ -1,0 +1,4 @@
+model,CHAIR_i (clean),Resolution Threshold (σ),POPE F1 (adversarial),POPE yes-ratio,Sycophancy slope,CSR (injected falsehood),Knowledge Inertia rate
+sim-frontier-a,,>max,,,,,0.195125
+sim-open-13b,,>max,,,,1.22,0.231125
+sim-open-7b,,>max,,,,1.1,0.25275

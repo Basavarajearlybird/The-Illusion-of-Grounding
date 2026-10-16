@@ -1,0 +1,4 @@
+model,track,clean_accuracy,combined,conflict,noise,pooled,visual
+sim-frontier-a,B,0.9813131313131314,0.5436,0.0505,0.5849,0.503,0.4519
+sim-open-13b,A,0.7873737373737374,0.4276,0.2256,0.4907,0.423,0.3772
+sim-open-7b,A,0.7287878787878788,0.3796,0.2366,0.4187,0.3697,0.3133

@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+model & decay\_lambda & decay\_a & decay\_floor & decay\_r2 & decay\_half\_life & decay\_n\_points & decay\_converged \\
+\midrule
+sim-open-7b & 0.171 & 0.522 & 0.207 & 0.989 & 4.053 & 6 & True \\
+sim-open-13b & 0.086 & 0.699 & 0.089 & 0.996 & 8.074 & 6 & True \\
+sim-frontier-a & 0.070 & 0.955 & 0.027 & 0.998 & 9.915 & 6 & True \\
+\bottomrule
+\end{tabular}
+\caption{Retrieval-noise decay rates, $acc(d)=a\,e^{-\lambda d}+c$. Higher $\lambda$ = faster collapse under hard-negative retrieval noise. Fits are weighted by per-dose sample count.}
+\end{table}

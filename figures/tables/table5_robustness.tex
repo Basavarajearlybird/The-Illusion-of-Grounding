@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrrr}
+\toprule
+model & track & clean\_accuracy & combined & conflict & noise & pooled & visual \\
+\midrule
+sim-frontier-a & B & 0.981 & 0.544 & 0.051 & 0.585 & 0.503 & 0.452 \\
+sim-open-13b & A & 0.787 & 0.428 & 0.226 & 0.491 & 0.423 & 0.377 \\
+sim-open-7b & A & 0.729 & 0.380 & 0.237 & 0.419 & 0.370 & 0.313 \\
+\bottomrule
+\end{tabular}
+\caption{Robustness Score $\mathcal{R} = (Acc_{adverse}/Acc_{clean})\times(1-ECE)$. Uncertainty Error is operationalised as Expected Calibration Error. On Track A, confidence is the length-normalised sequence probability; on Track B it is self-consistency across N=10 samples. The two tracks are not pooled.}
+\end{table}

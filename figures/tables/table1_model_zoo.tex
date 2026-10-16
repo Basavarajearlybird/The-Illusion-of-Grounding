@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrrr}
+\toprule
+Model & Track & Clean & Combined & Conflict & Noise & Visual & N \\
+\midrule
+sim-frontier-a & B & 0.981 & 0.618 & 0.126 & 0.638 & 0.564 & 8000 \\
+sim-open-13b & A & 0.787 & 0.438 & 0.411 & 0.503 & 0.406 & 8000 \\
+sim-open-7b & A & 0.729 & 0.359 & 0.423 & 0.426 & 0.308 & 8000 \\
+\bottomrule
+\end{tabular}
+\caption{Model zoo accuracy by stressor axis. Track A = white-box (constrained scoring); Track B = black-box (sampling, N=10 at T=0.7).}
+\end{table}

@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrrrrrl}
+\toprule
+model & track & n & accuracy & trust\_index & knowledge\_inertia & sensory\_capture & reasoning\_collapse & csr\_mean & counterfactual\_symmetry & verdict \\
+\midrule
+sim-frontier-a & B & 175 & 0.126 & 0.742 & 0.874 & 0.000 & 0.000 & NaN & 0.815 & Text-Biased \\
+sim-open-13b & A & 175 & 0.411 & 0.609 & 0.560 & 0.000 & 0.029 & 1.220 & 0.974 & Text-Biased \\
+sim-open-7b & A & 175 & 0.423 & 0.549 & 0.480 & 0.000 & 0.097 & 1.100 & 0.968 & Balanced \\
+\bottomrule
+\end{tabular}
+\caption{The Conflict Matrix — modality preference under cross-modal conflict. Trust Index > 0.5 indicates text bias. Counterfactual symmetry is computed only over genuinely twinned pairs; 1.0 means the bias flips symmetrically. CSR is the REFIND context-sensitivity ratio on the injected falsehood.}
+\end{table}

@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrr}
+\toprule
+model & axis & correct & knowledge\_inertia & reasoning\_collapse & sensory\_capture \\
+\midrule
+sim-frontier-a & clean & 0.981 & 0.000 & 0.019 & 0.000 \\
+sim-frontier-a & combined & 0.618 & 0.335 & 0.047 & 0.001 \\
+sim-frontier-a & conflict & 0.126 & 0.874 & 0.000 & 0.000 \\
+sim-frontier-a & noise & 0.638 & 0.362 & 0.000 & 0.000 \\
+sim-frontier-a & visual & 0.564 & 0.000 & 0.433 & 0.002 \\
+sim-open-13b & clean & 0.787 & 0.000 & 0.213 & 0.000 \\
+sim-open-13b & combined & 0.438 & 0.420 & 0.084 & 0.059 \\
+sim-open-13b & conflict & 0.411 & 0.560 & 0.029 & 0.000 \\
+sim-open-13b & noise & 0.503 & 0.432 & 0.065 & 0.000 \\
+sim-open-13b & visual & 0.406 & 0.000 & 0.522 & 0.072 \\
+sim-open-7b & clean & 0.729 & 0.000 & 0.271 & 0.000 \\
+sim-open-7b & combined & 0.359 & 0.463 & 0.099 & 0.079 \\
+sim-open-7b & conflict & 0.423 & 0.480 & 0.097 & 0.000 \\
+sim-open-7b & noise & 0.426 & 0.487 & 0.087 & 0.000 \\
+sim-open-7b & visual & 0.308 & 0.000 & 0.598 & 0.094 \\
+\bottomrule
+\end{tabular}
+\caption{Failure-mode proportions by model and axis.}
+\end{table}

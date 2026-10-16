@@ -1,0 +1,5 @@
+Failure mode,Definition
+Correct,Grounded. The answer matches what the image shows.
+Knowledge Inertia,"The model ignored the image and followed incorrect retrieved text, reproducing the injected falsehood verbatim. This is the Illusion of Grounding in its purest form: the output is fluent, sourced, and wrong."
+Sensory Capture,The model ignored correct retrieved text and committed to a reading of a degraded image. The percept overrode the document.
+Reasoning Collapse,"The model matched neither modality, producing an off-topic, incoherent, or self-contradictory answer under the stressor."
