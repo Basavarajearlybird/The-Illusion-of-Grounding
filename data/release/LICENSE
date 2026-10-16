@@ -1,0 +1,8 @@
+GIB-15K annotations and code: CC-BY 4.0.
+
+Source imagery remains under its original licence:
+  * COCO 2017 — see https://cocodataset.org/#termsofuse
+  * Visual Genome — CC-BY 4.0, see https://homes.cs.washington.edu/~ranjay/visualgenome/
+
+Degraded images are NOT redistributed. They are regenerated from source by
+`make dataset` and verified byte-for-byte against the `image_sha256` column.

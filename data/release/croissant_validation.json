@@ -1,0 +1,11 @@
+{
+  "file": "F:\\Project 2 in opus 4.8\\data\\release\\croissant.json",
+  "exists": true,
+  "has_context": true,
+  "has_recordset": true,
+  "n_fields": 12,
+  "validator": "mlcroissant",
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "built_at": "2026-07-29T07:46:25",
+  "git_sha": "nogit",
+  "seed": 20260721,
+  "sources": [
+    "coco",
+    "visual_genome"
+  ],
+  "n_clean_pairs": 15000,
+  "n_variants_full": 325000,
+  "n_variants_eval": 59648,
+  "dataset_hash": "a33503464ec549cb",
+  "eval_hash": "80bf5d5c1c231fc8",
+  "by_axis": {
+    "clean": 15000,
+    "combined": 25000,
+    "conflict": 15000,
+    "noise": 75000,
+    "visual": 195000
+  },
+  "by_sub_type": {
+    "object": 5000,
+    "attribute": 5000,
+    "relation": 5000
+  },
+  "spot_check_n": 750,
+  "qa_stats": {
+    "scenes": 11744,
+    "candidates": 77631,
+    "round_trip_rejected": 5062,
+    "kept": 15000,
+    "elapsed_s": 125.9
+  },
+  "embedder_backend": "tfidf",
+  "index_backend": "numpy",
+  "embedder_model": "BAAI/bge-large-en-v1.5",
+  "conflict_items": 15000,
+  "conflict_twinned": 4236,
+  "combined_pairs": 1000,
+  "characterization": {
+    "sub_type_balance_entropy": 1.0,
+    "answer_entropy": 0.6374,
+    "hard_negative_overlap": {
+      "mean": 0.8887,
+      "median": 0.9,
+      "p90": 1.0,
+      "n": 5100
+    },
+    "conflict": {
+      "n": 1288,
+      "plausible_swap_rate": 0.7888,
+      "degenerate_no_conflict": 0
+    },
+    "twin_yield": {
+      "n_twinned_items": 548,
+      "n_complete_pairs": 274,
+      "twinned_fraction": 0.4255
+    }
+  }
+}

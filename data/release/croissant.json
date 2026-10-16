@@ -1,0 +1,288 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "name": "GIB-15K",
+  "description": "A diagnostic benchmark for multimodal RAG under retrieval noise, visual ambiguity, and cross-modal conflict. 15,000 image-QA pairs labelled by hallucination sub-type, each with retrieval-noised, visually degraded, and cross-modal-conflicted adversarial variants at controlled dosages.",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://huggingface.co/datasets/gib15k",
+  "version": "1.0.0",
+  "datePublished": "2026-07-30",
+  "citeAs": "@misc{gib15k, title={The Illusion of Grounding}, year={2026}}",
+  "keywords": [
+    "multimodal",
+    "retrieval-augmented generation",
+    "hallucination",
+    "vision-language models",
+    "benchmark",
+    "robustness"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileSet",
+      "@id": "gib15k-parquet",
+      "name": "gib15k-parquet",
+      "description": "325000 adversarial variant rows, one parquet per axis.",
+      "encodingFormat": "application/vnd.apache.parquet",
+      "includes": "variants/**/*.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "variants",
+      "name": "variants",
+      "description": "325000 adversarial variant rows.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "variants/pair_id",
+          "name": "pair_id",
+          "description": "Stable id shared across all variants of a pair.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "pair_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/variant_id",
+          "name": "variant_id",
+          "description": "{pair_id}-{axis}-{dose}; unique per row.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "variant_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/sub_type",
+          "name": "sub_type",
+          "description": "Sub-type: object / attribute / relation.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "sub_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/axis",
+          "name": "axis",
+          "description": "Stressor axis: clean/noise/visual/conflict/combined.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "axis"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/dose",
+          "name": "dose",
+          "description": "Sigma, kernel px, crop %, or distractor count.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "dose"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/image_path",
+          "name": "image_path",
+          "description": "Path to the (possibly degraded) image.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "image_path"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/image_sha256",
+          "name": "image_sha256",
+          "description": "SHA-256 of the served image bytes.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "image_sha256"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/question",
+          "name": "question",
+          "description": "The visual question.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "question"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/answer_visual",
+          "name": "answer_visual",
+          "description": "Ground truth shown in the image.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "answer_visual"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/answer_textual",
+          "name": "answer_textual",
+          "description": "Injected falsehood; empty if none.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "answer_textual"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/gt_doc_position",
+          "name": "gt_doc_position",
+          "description": "Index of the true passage; -1 if absent.",
+          "dataType": [
+            "sc:Integer"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "gt_doc_position"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "variants/twin_id",
+          "name": "twin_id",
+          "description": "Links counterfactual twin pairs.",
+          "dataType": [
+            "sc:Text"
+          ],
+          "source": {
+            "fileSet": {
+              "@id": "gib15k-parquet"
+            },
+            "extract": {
+              "column": "twin_id"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
