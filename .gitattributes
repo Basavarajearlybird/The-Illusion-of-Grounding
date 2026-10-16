@@ -1,0 +1,7 @@
+# Normalise line endings so the repo is byte-stable across OSes.
+* text=auto eol=lf
+*.png binary
+*.pdf binary
+*.jpg binary
+*.parquet binary
+*.sqlite binary
