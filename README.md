@@ -1,4 +1,4 @@
-# GIB-15K — The Illusion of Grounding
+# GIB-15K — The Illusion of Grounding 
 
 **A Diagnostic Benchmark for Multimodal RAG under Retrieval Noise, Visual Ambiguity, and Cross-Modal Conflict**
 
