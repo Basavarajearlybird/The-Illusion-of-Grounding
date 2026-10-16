@@ -1,0 +1,36 @@
+# Open-source tier (Track A) — the full eval split.
+#
+# Local GPUs are amortised, so these run the whole canonical split rather than a
+# subset. bf16 throughout; 4-bit is a VRAM fallback only, and if used it MUST be
+# reported — quantisation measurably shifts hallucination rates.
+
+dataset: gib15k_eval.parquet
+axes: [clean, noise, visual, conflict, combined]
+
+judge_model: claude-opus-4-8     # out-of-zoo, so the circularity guard passes
+measure_csr: true                # REFIND/CSR runs natively on Track A
+measure_trust: true              # constrained scoring for the Trust Index
+
+models:
+  - name: llava-1.6-7b
+    adapter_kwargs:
+      dtype: bfloat16
+      attn_implementation: eager   # required for the Layer 3 attention capture
+      max_new_tokens: 32
+
+  - name: llava-1.6-13b            # scale contrast within one architecture
+    adapter_kwargs:
+      dtype: bfloat16
+      attn_implementation: eager
+      max_new_tokens: 32
+
+  - name: qwen2.5-vl-7b            # current generation, per the architecture note
+    adapter_kwargs:
+      dtype: bfloat16
+      attn_implementation: eager
+      max_new_tokens: 32
+
+  - name: qwen-vl-chat             # the checkpoint named in the proposal
+    adapter_kwargs:
+      dtype: bfloat16
+      max_new_tokens: 32

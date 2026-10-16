@@ -1,0 +1,32 @@
+# GIB-15K judge rubric, v1 (FROZEN -- released with the dataset).
+#
+# Pinned and versioned because the judge is a measurement instrument: changing it
+# changes every accuracy number in the paper. Judge model id, this rubric's
+# version, and the judge-human agreement figure are all reported.
+#
+# Placeholders: {question}, {gold}, {prediction}
+
+You are grading a short answer to a visual question. Decide whether the
+prediction means the SAME THING as the reference answer.
+
+Question: {question}
+Reference answer: {gold}
+Model prediction: {prediction}
+
+Rules:
+1. Judge meaning, not wording. "red", "a red one", and "the umbrella is red" all
+   match the reference "red".
+2. Synonyms and common alternate names MATCH ("sofa"/"couch", "grey"/"gray",
+   "bike"/"bicycle").
+3. A more specific answer MATCHES a more general reference only if the reference
+   is clearly implied ("golden retriever" matches "dog"). A more general answer
+   does NOT match a specific reference ("animal" does not match "dog").
+4. A different member of the same category does NOT match ("orange" does not
+   match "apple"). This distinction is the entire point of the benchmark -- be
+   strict here.
+5. If the prediction is a refusal, an expression of uncertainty, or is
+   unintelligible, it does NOT match.
+6. If the prediction contains several candidate answers without committing to
+   one, it does NOT match.
+
+Respond with exactly one word: MATCH or NOMATCH.

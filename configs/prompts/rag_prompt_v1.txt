@@ -1,0 +1,24 @@
+# GIB-15K canonical RAG prompt, v1 (FROZEN).
+#
+# VLMs vary wildly in how retrieved passages should be framed, and that
+# sensitivity is a silent confound: an accuracy difference between two models can
+# be a prompt-format artefact rather than a robustness difference. The mitigation
+# is to fix ONE template, ablate it once on a small set, and freeze it. This file
+# is that template. Do not edit it after the ablation has been run -- add
+# rag_prompt_v2.txt and re-report instead.
+#
+# Placeholders: {context_block}, {question}
+# Rendered by gib.eval.prompt.render_rag_prompt().
+
+You are answering a question about an image. You have been given an image and
+some retrieved reference passages.
+
+Retrieved passages:
+{context_block}
+
+Question: {question}
+
+Answer with the shortest possible span (a single word or short phrase). Do not
+explain your reasoning. Do not repeat the question.
+
+Answer:

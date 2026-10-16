@@ -1,0 +1,34 @@
+# GIB-15K dataset build configuration (Layer 1).
+#
+# The released benchmark is built from COCO + Visual Genome. Set
+# `sources: [synthetic]` for an offline smoke run that exercises every stage of
+# the pipeline without the ~45 GB of downloads.
+
+n_pairs: 15000
+per_sub_type: 5000          # object / attribute / relation, per requirement 2
+sources: [coco, visual_genome]
+seed: 20260721
+
+# Canonical GIB-15K-eval split size. The full cross-product is far larger and is
+# released as GIB-15K-full, but is deliberately not evaluated.
+eval_split_size: 50000
+
+noise:                       # Axis 1 - retrieval noise
+  doses: [1, 3, 5, 10, 20]
+  embedder: BAAI/bge-large-en-v1.5
+  hard_negative_ratio: 0.5   # share of distractors from surgical mutation
+  top_k_neighbours: 32
+
+visual:                      # Axis 2 - visual ambiguity
+  gaussian_sigma: [1, 2, 4, 8, 16]
+  motion_kernel: [5, 10, 20, 40]
+  crop_visible: [0.5, 0.25, 0.10, 0.05]
+  native_resolution: 336
+
+conflict:                    # Axis 3 - cross-modal conflict
+  make_twins: true
+
+combined:                    # visual x noise sub-grid (vulnerability heatmap only)
+  n_pairs: 1000
+  sigma_grid: [0, 1, 2, 4, 8]
+  distractor_grid: [0, 1, 3, 5, 10]

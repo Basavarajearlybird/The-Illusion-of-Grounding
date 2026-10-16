@@ -1,0 +1,39 @@
+# Closed-source tier (Track B) — a stratified subset.
+#
+# Cost control: a stratified 3–5K subset rather than the full split, stratified
+# by axis × dose × sub_type so every cell of the vulnerability heatmap keeps
+# n >= 50. With N=10 samples this lands in the low hundreds of dollars, and the
+# persistent response cache guarantees it is paid exactly once.
+#
+# These models expose no usable logprobs, so the Trust Index and confidence are
+# estimated by sampling and CSR runs through an open proxy scorer. Proxy rows are
+# stamped and labelled in every figure.
+
+dataset: gib15k_eval.parquet
+axes: [clean, noise, visual, conflict, combined]
+
+limit: 5000
+n_samples: 10
+temperature: 0.7
+proxy_model: llava-1.6-7b
+
+judge_model: claude-opus-4-8     # out-of-zoo; judging gpt-4o with gpt-4o is blocked
+
+models:
+  - name: gpt-4o
+    adapter_kwargs:
+      rpm: 60
+      max_new_tokens: 32
+
+  - name: gemini-1.5-pro
+    adapter_kwargs:
+      rpm: 30
+      max_new_tokens: 32
+
+  # Frontier tier — kept alongside the proposal's named models rather than
+  # replacing them, so continuity with the proposal is preserved while the zoo
+  # still covers the current generation.
+  - name: gpt-4o-mini
+    adapter_kwargs: {rpm: 100, max_new_tokens: 32}
+  - name: gemini-2.0-flash
+    adapter_kwargs: {rpm: 60, max_new_tokens: 32}
