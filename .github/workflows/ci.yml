@@ -1,0 +1,91 @@
+name: CI
+
+# Every claim in the paper must be produced by an automated, re-runnable
+# pipeline. CI enforces that the pipeline actually runs: the offline smoke build
+# exercises all five layers end-to-end on synthetic data with no GPU and no API
+# keys, so a break anywhere in the chain fails the build.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: tests + lint (py${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt ruff
+
+      - name: Lint (ruff)
+        run: ruff check gib/ tests/
+
+      - name: Unit + integration tests
+        run: python -m pytest tests/ -q
+
+  smoke:
+    name: offline end-to-end smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Full pipeline on synthetic data + simulated adapters: dataset -> eval ->
+      # interp -> human -> figures -> release. No downloads, no GPU, no API keys.
+      - name: Smoke (dataset build)
+        run: python -m gib.cli dataset --pairs 600 --sources synthetic
+
+      - name: Smoke (validate contract)
+        run: python -m gib.cli validate
+
+      - name: Smoke (characterize + croissant)
+        run: |
+          python -m gib.cli characterize
+          python -m gib.cli croissant
+
+      - name: Smoke (simulated eval + probes)
+        run: |
+          python -m gib.cli eval --model sim-open-7b --offline-judge --n-samples 4
+          python -m gib.cli probes --model sim-open-7b
+
+      - name: Smoke (figures + release)
+        run: |
+          python -m gib.cli figures
+          python -m gib.cli release
+
+      - name: Upload smoke artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-figures
+          path: |
+            figures/
+            data/release/
+          retention-days: 7
+          if-no-files-found: warn
