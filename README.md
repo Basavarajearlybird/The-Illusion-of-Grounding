@@ -1,5 +1,7 @@
 # GIB-15K — The Illusion of Grounding 
 
+*Currently expanding toward 250K+ examples; dataset scaling and validation are in progress.*
+
 **A Diagnostic Benchmark for Multimodal RAG under Retrieval Noise, Visual Ambiguity, and Cross-Modal Conflict**
 
 [![CI](https://img.shields.io/badge/CI-py3.10--3.12-brightgreen)](.github/workflows/ci.yml)
