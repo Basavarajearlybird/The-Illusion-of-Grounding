@@ -64,12 +64,12 @@ flowchart TD
     subgraph AXES ["⚡ THREE ORTHOGONAL ADVERSARIAL STRESS AXES"]
         AXIS1["Axis 1: Retrieval Noise (gib/dataengine/hardneg.py)<br/>Hard-Negative Distractors k ∈ {1, 3, 5, 10, 20}<br/>Predicate Inversion • Attribute Substitution • Cross-Record Borrowing • SVO Reversal<br/>Mean Cosine Sim: 0.31 (σ=0.08) | FAISS Hard Variant: Dist 0.19"]
         AXIS2["Axis 2: Visual Ambiguity (gib/dataengine/degrade.py)<br/>13 Calibrated Degradations Across 3 Families:<br/>• Gaussian Blur: σ ∈ {1, 2, 4, 8, 16}, Kernel (6σ+1)²<br/>• Motion Blur: Horizontal Kernels {5, 10, 20, 40} px<br/>• Center Cropping: {50%, 25%, 10%, 5%} Object Visibility"]
-        AXIS3["Axis 3: Cross-Modal Conflict (gib/dataengine/conflict.py)<br/>30 Semantic Conflict Pairs Across 5 Categories (6/cat)<br/>CLIP-ViT-L/14 Sim > 0.65 • MiniLM Label Dist > 0.40<br/>Original Conflict C = (xᵥᴬ, dᴮ) & Counterfactual Flip C⁻¹ = (xᵥᴮ, dᴬ)"]
+        AXIS3["Axis 3: Cross-Modal Conflict (gib/dataengine/conflict.py)<br/>30 Semantic Conflict Pairs Across 5 Categories (6/cat)<br/>CLIP-ViT-L/14 Sim > 0.65 • MiniLM Label Dist > 0.40<br/>Original Conflict C = (xᵥᴬ, dᴮ) & Counterfactual Flip C⁻¹ = (xᵥᴮ, dᴬ)
         SVO --> AXIS1 & AXIS2 & AXIS3
     end
 
     subgraph MODELS ["🤖 EVALUATED SYSTEM SUITE & INSTRUMENTATION"]
-        OPEN["Open-Source White-Box VLMs (Cross-Attention Hooks)<br/>• LLaVA-1.6-Mistral-7B (4-bit NF4, LLaVANextCrossAttention)<br/>• Qwen-VL-7B (FP16, Cross-Attention Modules)<br/>Nᵥ = 576 Visual Patch Tokens (Self-Attention Excluded)"]
+        OPEN["Open-Source White-Box VLMs (Cross-Attention Hooks)<br/>• LLaVA-1.6-Mistral-7B (4-bit NF4, LLaVANextCrossAttention)<br/>• Qwen-VL-7B (FP16, Cross-Attention Modules)<br/>Nᵥ = 576 Visual Patch Tokens (Self-Attention Excluded)
         CLOSED["Closed-Source Frontier APIs (Constrained Logprob Decoding)<br/>• GPT-4o (temp=0, completion logprobs)<br/>• Gemini 1.5 Pro (temp=0, logprobs=True)<br/>Prompt: 'Answer with exactly one word: [A] or [B]'"]
         HUMAN["Human Baseline Cohort (gib/human/)<br/>• n = 50 MTurk Workers (45 High-Gap Items, κ = 0.80)<br/>• Independent Blind Expert Volunteer Cohort"]
         AXIS1 & AXIS2 & AXIS3 --> OPEN & CLOSED & HUMAN
@@ -81,7 +81,7 @@ flowchart TD
         M_SIG["3. Visual Ambiguity Thresholds<br/>σ*, ker*, crop* at ΔCHAIR > 10 pts"]
         M_TI["4. Cross-Modal Trust Index TI(M) & SB<br/>P(ŷ=B)/P(ŷ=A) & |TI(C)·TI(C⁻¹) − 1|"]
         M_R["5. ECE-Penalised Robustness R<br/>[Acc(adv) / Acc(clean)] × (1 − ECE)"]
-        M_ADS["6. Attention Divergence Score (ADS)<br/>(1/L) Σ Aₜ⁽ˡ⁾ / (Aᵥ⁽ˡ⁾ + Aₜ⁽ˡ⁾)"]
+        M_ADS["6. Attention Divergence Score (ADS)<br/>(1/L) Σ Aₜ⁽ˡ⁾ / (Aᵥ⁽ˡ⁾ + Aₜ⁽ˡ⁾)
         OPEN & CLOSED & HUMAN --> M_GIS & M_RV & M_SIG & M_TI & M_R
         OPEN --> M_ADS
     end
@@ -211,7 +211,7 @@ Here, **Δ** is the embedding distance between a hard-negative distractor and it
   * **Closed-Source Frontier API Models (Constrained Logprob Decoding):**
     * `GPT-4o` (`temperature = 0`, token logprobs extracted via completion `logprobs` field; point estimate ± subsample range over two 500-instance subsets; API spend: `$342`).
     * `Gemini 1.5 Pro` (`temperature = 0`, token logprobs extracted via `logprobs = True`; point estimate ± subsample range over two 500-instance subsets; API spend: `$218`).
-    * *Constrained Decoding Protocol for Axis 3:* `P_M(ŷ = B)` and `P_M(ŷ = A)` are elicited using the exact prompt `"Answer with exactly one word: [A] or [B]"` with normalised token-level log-probabilities.
+    * *Constrained Decoding Protocol for Axis 3:* Pₘ((ŷ = B)` and `Pₘ((ŷ = A)` are elicited using the exact prompt `"Answer with exactly one word: [A] or [B]"` with normalised token-level log-probabilities.
   * **Human Baseline Cohort (`gib/human/`):**
     * `n = 50` Amazon Mechanical Turk workers evaluated on 45 high-gap instances (`$0.15/HIT`, median `$12/hr`, approval rate `≥ 97%`, `≥ 5,000` approved HITs; IRB Category 2 exemption with informed consent), supplemented by an independent blind expert volunteer cohort (NLP specialists, computer vision researchers, cognitive scientists, and a generalist).
 * **Compute & Statistical Rigor (`gib/eval/metrics/`):**
@@ -264,11 +264,11 @@ R_agg × 100
 
 | System | Fit Quality `R² [95% CI]` | Per-Distractor Displacement `p`<sub>`e`</sub> `[95% CI]` | Distractor Sensitivity `λ [95% CI]` ↑ | Fitted Envelope at `k = 20` (`Acc`<sub>`0`</sub> Multiplier) | `RV(20)` Accuracy Lost (`%`, Fig. 1b) ↓ | Observed `k = 20` Loss (`§7.2`) ↓ |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **`LLaVA-1.6-Mistral-7B`** | `0.981 [0.962, 0.992]` | `0.051 [0.043, 0.059]` | `2.14 [1.89, 2.41]` | `Acc_0 × 0.352` | `64.9%` | `> 60%` *(Severe)* |
-| **`GPT-4o`** | `0.971 [0.948, 0.986]` | `0.048 [0.040, 0.056]` | `2.23 [1.98, 2.49]` | `Acc_0 × 0.372` | `62.6%` | **`61.8%`** |
-| **`Gemini 1.5 Pro`** | `0.974 [0.952, 0.988]` | `0.043 [0.035, 0.051]` | `2.31 [2.04, 2.59]` | `Acc_0 × 0.406` | `58.5%` | `~58%` |
-| **`Qwen-VL-7B`** | `0.976 [0.954, 0.989]` | **`0.031 [0.024, 0.038]`** | **`2.89 [2.61, 3.18]`** | **`Acc_0 × 0.531`** | **`46.7%`** | **`42.7%`** *(Most Robust AI)* |
-| **`Human (n = 50)`** | `0.968 [0.942, 0.985]` | **`0.004 [0.002, 0.007]`** | **`8.12 [7.48, 8.81]`** | **`Acc_0 × 0.923`** | **`7.7%`** | **`8.9%` (`RV(20) = 0.089`)** |
+| **`LLaVA-1.6-Mistral-7B`** | `0.981 [0.962, 0.992]` | `0.051 [0.043, 0.059]` | `2.14 [1.89, 2.41]` | `Acc₀ × 0.352` | `64.9%` | `> 60%` *(Severe)* |
+| **`GPT-4o`** | `0.971 [0.948, 0.986]` | `0.048 [0.040, 0.056]` | `2.23 [1.98, 2.49]` | `Acc₀ × 0.372` | `62.6%` | **`61.8%`** |
+| **`Gemini 1.5 Pro`** | `0.974 [0.952, 0.988]` | `0.043 [0.035, 0.051]` | `2.31 [2.04, 2.59]` | `Acc₀ × 0.406` | `58.5%` | `~58%` |
+| **`Qwen-VL-7B`** | `0.976 [0.954, 0.989]` | **`0.031 [0.024, 0.038]`** | **`2.89 [2.61, 3.18]`** | **`Acc₀ × 0.531`** | **`46.7%`** | **`42.7%`** *(Most Robust AI)* |
+| **`Human (n = 50)`** | `0.968 [0.942, 0.985]` | **`0.004 [0.002, 0.007]`** | **`8.12 [7.48, 8.81]`** | **`Acc₀ × 0.923`** | **`7.7%`** | **`8.9%` (`RV(20) = 0.089`)** |
 
 ```text
 Figure 1(b): Retrieval Vulnerability RV(20) — Percentage of Clean Accuracy Lost at k = 20 Distractors
@@ -383,7 +383,7 @@ Axis 3 (Rel Conf.)  │ ██████████████████�
 
 ## 8. Mechanistic Interpretability: Cross-Attention Divergence Analysis (Table 5 & Figure 5)
 
-> **Key Finding 6:** *In the open-source models where cross-attention introspection is possible (`LLaVA-1.6` and `Qwen-VL`, `N_v = 576` visual patch tokens, `300` instances per mode), **Knowledge Inertia** correlates strongly with **visual-token attention collapse**: `ADS` surges from **`0.29–0.31`** (clean) to **`0.87`** (`LLaVA-1.6`) and **`0.82`** (`Qwen-VL`), with point-biserial **`r = −0.61` (`p < 0.001`)** and classifier **`AUC = 0.83`**.*
+> **Key Finding 6:** *In the open-source models where cross-attention introspection is possible (`LLaVA-1.6` and `Qwen-VL`, `Nᵥ = 576` visual patch tokens, `300` instances per mode), **Knowledge Inertia** correlates strongly with **visual-token attention collapse**: `ADS` surges from **`0.29–0.31`** (clean) to **`0.87`** (`LLaVA-1.6`) and **`0.82`** (`Qwen-VL`), with point-biserial **`r = −0.61` (`p < 0.001`)** and classifier **`AUC = 0.83`**.*
 
 | Open-Source VLM (White-Box Hooks) | Clean Baseline `ADS [95% CI]` | Sensory Capture (`SC`) `ADS [95% CI]` | Knowledge Inertia (`KI`) `ADS [95% CI]` | Reasoning Collapse (`RC`) `ADS [95% CI]` | Mechanistic Diagnostic Signature |
 | :--- | :---: | :---: | :---: | :---: | :--- |
