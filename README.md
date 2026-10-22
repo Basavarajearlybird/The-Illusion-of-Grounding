@@ -64,24 +64,24 @@ flowchart TD
     subgraph AXES ["⚡ THREE ORTHOGONAL ADVERSARIAL STRESS AXES"]
         AXIS1["Axis 1: Retrieval Noise (gib/dataengine/hardneg.py)<br/>Hard-Negative Distractors k ∈ {1, 3, 5, 10, 20}<br/>Predicate Inversion • Attribute Substitution • Cross-Record Borrowing • SVO Reversal<br/>Mean Cosine Sim: 0.31 (σ=0.08) | FAISS Hard Variant: Dist 0.19"]
         AXIS2["Axis 2: Visual Ambiguity (gib/dataengine/degrade.py)<br/>13 Calibrated Degradations Across 3 Families:<br/>• Gaussian Blur: σ ∈ {1, 2, 4, 8, 16}, Kernel (6σ+1)²<br/>• Motion Blur: Horizontal Kernels {5, 10, 20, 40} px<br/>• Center Cropping: {50%, 25%, 10%, 5%} Object Visibility"]
-        AXIS3["Axis 3: Cross-Modal Conflict (gib/dataengine/conflict.py)<br/>30 Semantic Conflict Pairs Across 5 Categories (6/cat)<br/>CLIP-ViT-L/14 Sim > 0.65 • MiniLM Label Dist > 0.40<br/>Original Conflict C = (x_v^A, d^B) & Counterfactual Flip C⁻¹ = (x_v^B, d^A)"]
+        AXIS3["Axis 3: Cross-Modal Conflict (gib/dataengine/conflict.py)<br/>30 Semantic Conflict Pairs Across 5 Categories (6/cat)<br/>CLIP-ViT-L/14 Sim > 0.65 • MiniLM Label Dist > 0.40<br/>Original Conflict C = (xᵥᴬ, dᴮ) & Counterfactual Flip C⁻¹ = (xᵥᴮ, dᴬ)"]
         SVO --> AXIS1 & AXIS2 & AXIS3
     end
 
     subgraph MODELS ["🤖 EVALUATED SYSTEM SUITE & INSTRUMENTATION"]
-        OPEN["Open-Source White-Box VLMs (Cross-Attention Hooks)<br/>• LLaVA-1.6-Mistral-7B (4-bit NF4, LLaVANextCrossAttention)<br/>• Qwen-VL-7B (FP16, Cross-Attention Modules)<br/>N_v = 576 Visual Patch Tokens (Self-Attention Excluded)"]
+        OPEN["Open-Source White-Box VLMs (Cross-Attention Hooks)<br/>• LLaVA-1.6-Mistral-7B (4-bit NF4, LLaVANextCrossAttention)<br/>• Qwen-VL-7B (FP16, Cross-Attention Modules)<br/>Nᵥ = 576 Visual Patch Tokens (Self-Attention Excluded)"]
         CLOSED["Closed-Source Frontier APIs (Constrained Logprob Decoding)<br/>• GPT-4o (temp=0, completion logprobs)<br/>• Gemini 1.5 Pro (temp=0, logprobs=True)<br/>Prompt: 'Answer with exactly one word: [A] or [B]'"]
         HUMAN["Human Baseline Cohort (gib/human/)<br/>• n = 50 MTurk Workers (45 High-Gap Items, κ = 0.80)<br/>• Independent Blind Expert Volunteer Cohort"]
         AXIS1 & AXIS2 & AXIS3 --> OPEN & CLOSED & HUMAN
     end
 
     subgraph METRICS ["📐 SIX UNIFIED DIAGNOSTIC QUANTITIES (gib/eval/)"]
-        M_GIS["1. Grounding Illusion Score (GIS)<br/>P_M(ŷ | x_v, x_t, R) · 𝟙[ŷ ∉ G(x_v)]"]
+        M_GIS["1. Grounding Illusion Score (GIS)<br/>Pₘ(ŷ | xᵥ, xₜ, R) · 𝟙[ŷ ∉ G(xᵥ)]"]
         M_RV["2. Retrieval Vulnerability RV(k)<br/>[Acc(0) − Acc(k)] / Acc(0) & Decay Parameter λ"]
         M_SIG["3. Visual Ambiguity Thresholds<br/>σ*, ker*, crop* at ΔCHAIR > 10 pts"]
         M_TI["4. Cross-Modal Trust Index TI(M) & SB<br/>P(ŷ=B)/P(ŷ=A) & |TI(C)·TI(C⁻¹) − 1|"]
-        M_R["5. ECE-Penalised Robustness R<br/>(Acc_adv / Acc_clean) × (1 − ECE)"]
-        M_ADS["6. Attention Divergence Score (ADS)<br/>(1/L) Σ A_t^(l) / (A_v^(l) + A_t^(l))"]
+        M_R["5. ECE-Penalised Robustness R<br/>[Acc(adv) / Acc(clean)] × (1 − ECE)"]
+        M_ADS["6. Attention Divergence Score (ADS)<br/>(1/L) Σ Aₜ⁽ˡ⁾ / (Aᵥ⁽ˡ⁾ + Aₜ⁽ˡ⁾)"]
         OPEN & CLOSED & HUMAN --> M_GIS & M_RV & M_SIG & M_TI & M_R
         OPEN --> M_ADS
     end
